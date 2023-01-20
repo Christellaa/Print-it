@@ -36,21 +36,17 @@ for (let i = 0; i < slides.length; i++) {
 
 document.getElementById("slide_left").addEventListener('click', function() {
 	//alert("Previous slide");
-	let nextImgIndex = 0;
 	let previousImgIndex = 0;
 	let bannerP = document.getElementById("banner-p");
 	let dotElement = document.getElementsByClassName("dot");
 	
 	for (let i = 0; i < slides.length; i++) {
-		console.log(bannerImgFileName, i);
 		if(bannerImgFileName === slides[0].image) {
-			console.log("b");
 			bannerImg.src = "./assets/images/slideshow/" + slides[slides.length - 1].image;
 			previousImgIndex = slides.length - 1;
 			dotElement[previousImgIndex].classList.add("dot_selected");
 			dotElement[0].classList.remove("dot_selected");
 		} else if(bannerImgFileName === slides[i].image) {
-			console.log(i);
 			bannerImg.src = "./assets/images/slideshow/" + slides[i - 1].image;
 			dotElement[i - 1].classList.add("dot_selected");
 			dotElement[i].classList.remove("dot_selected");
