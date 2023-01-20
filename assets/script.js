@@ -20,7 +20,6 @@ const slides = [
 
 const bulletpoint = document.getElementById("bullet_point");
 let bannerImg = document.getElementById("banner-img");
-
 let bannerImgFileName = bannerImg.src.substring(bannerImg.src.lastIndexOf("/") + 1, bannerImg.src.length);
 
 for (let i = 0; i < slides.length; i++) {
@@ -33,12 +32,16 @@ for (let i = 0; i < slides.length; i++) {
 	};
 };
 
-
-document.getElementById("slide_left").addEventListener('click', function() {
-	//alert("Previous slide");
+function slideElements() {
+	let nextImgIndex = 0;
 	let previousImgIndex = 0;
 	let bannerP = document.getElementById("banner-p");
 	let dotElement = document.getElementsByClassName("dot");
+}
+
+document.getElementById("slide_left").addEventListener('click', function() {
+	//alert("Previous slide");
+	slideElements();
 	
 	for (let i = 0; i < slides.length; i++) {
 		if(bannerImgFileName === slides[0].image) {
@@ -59,10 +62,7 @@ document.getElementById("slide_left").addEventListener('click', function() {
 
 document.getElementById("slide_right").addEventListener('click', function() {
 	//alert("Next slide");
-	let nextImgIndex = 0;
-	let previousImgIndex = 0;
-	let bannerP = document.getElementById("banner-p");
-	let dotElement = document.getElementsByClassName("dot");
+	slideElements();
 	
 	for (let i = 0; i < slides.length; i++) {
 		if(bannerImgFileName === slides[i].image) {
