@@ -17,7 +17,6 @@ const slides = [
 	}
 ];
 
-
 const bulletpoint = document.getElementById("bullet_point");
 let bannerImg = document.getElementById("banner-img");
 let bannerImgFileName = bannerImg.src.substring(bannerImg.src.lastIndexOf("/") + 1, bannerImg.src.length);
@@ -32,53 +31,67 @@ for (let i = 0; i < slides.length; i++) {
 	};
 };
 
-function slideElements() {
-	let nextImgIndex = 0;
-	let previousImgIndex = 0;
-	let bannerP = document.getElementById("banner-p");
-	let dotElement = document.getElementsByClassName("dot");
-}
+
 
 document.getElementById("slide_left").addEventListener('click', function() {
 	//alert("Previous slide");
-	slideElements();
+	let nextImgIndex = 0;
+	let bannerP = document.getElementById("banner-p");
+	let dotElement = document.getElementsByClassName("dot");
+
+	function addDotSelectedToNextSlide() {
+		dotElement[nextImgIndex].classList.add("dot_selected");
+	}
+
+	function NextImgAndText() {
+		bannerImgFileName = slides[nextImgIndex].image;
+		bannerP.innerHTML = slides[nextImgIndex].tagLine;
+	}
 	
 	for (let i = 0; i < slides.length; i++) {
 		if(bannerImgFileName === slides[0].image) {
 			bannerImg.src = "./assets/images/slideshow/" + slides[slides.length - 1].image;
-			previousImgIndex = slides.length - 1;
-			dotElement[previousImgIndex].classList.add("dot_selected");
+			nextImgIndex = slides.length - 1;
+			addDotSelectedToNextSlide();
 			dotElement[0].classList.remove("dot_selected");
 		} else if(bannerImgFileName === slides[i].image) {
 			bannerImg.src = "./assets/images/slideshow/" + slides[i - 1].image;
 			dotElement[i - 1].classList.add("dot_selected");
 			dotElement[i].classList.remove("dot_selected");
-			previousImgIndex = i - 1;
+			nextImgIndex = i - 1;
 		}
 	}
-	bannerImgFileName = slides[previousImgIndex].image;
-	bannerP.innerHTML = slides[previousImgIndex].tagLine;
+	NextImgAndText();
 });
 
 document.getElementById("slide_right").addEventListener('click', function() {
 	//alert("Next slide");
-	slideElements();
+	let nextImgIndex = 0;
+	let previousImgIndex = 0;
+	let bannerP = document.getElementById("banner-p");
+	let dotElement = document.getElementsByClassName("dot");
+
+	function addDotSelectedToNextSlide() {
+		dotElement[nextImgIndex].classList.add("dot_selected");
+	}
+	function NextImgAndText() {
+		bannerImgFileName = slides[nextImgIndex].image;
+		bannerP.innerHTML = slides[nextImgIndex].tagLine;
+	}
 	
 	for (let i = 0; i < slides.length; i++) {
 		if(bannerImgFileName === slides[i].image) {
 			bannerImg.src = "./assets/images/slideshow/" + slides[i + 1].image;
 			nextImgIndex = i + 1;
 			previousImgIndex = i;
-			dotElement[nextImgIndex].classList.add("dot_selected");
+			addDotSelectedToNextSlide();
 			dotElement[previousImgIndex].classList.remove("dot_selected");
 		} else if(bannerImgFileName === slides[slides.length - 1].image) {
 			bannerImg.src = "./assets/images/slideshow/" + slides[0].image;
 			dotElement[0].classList.add("dot_selected");
 			dotElement[slides.length - 1].classList.remove("dot_selected");
-			bannerImgFileName = slides[nextImgIndex].image;
-			bannerP.innerHTML = slides[nextImgIndex].tagLine;
+			NextImgAndText();
 		}
 	}
-	bannerImgFileName = slides[nextImgIndex].image;
-	bannerP.innerHTML = slides[nextImgIndex].tagLine;
+	NextImgAndText();
 });
