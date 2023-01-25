@@ -30,8 +30,8 @@ for (let i = 0; i < slides.length; i++) {
 
 	if(bannerImgFileName === slides[i].image) {
 		dotElement.className += " dot_selected";
-	};
-};
+	}
+}
 
 
 document.getElementById("slide_left").addEventListener('click', function() {
