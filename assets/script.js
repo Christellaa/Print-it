@@ -73,24 +73,20 @@ document.getElementById("slide_left").addEventListener('click', function() {
 document.getElementById("slide_right").addEventListener('click', function() {
 	//alert("Next slide");
 	let nextImgIndex = 0;
-	let previousImgIndex = 0;
 	let bannerP = document.getElementById("banner-p");
 	let dotElement = document.getElementsByClassName("dot");
 	
 	for (let i = 0; i < slides.length; i++) {
-		if(bannerImgFileName === slides[i].image) {
-			changeImgSrc(slides[i + 1]);
-			nextImgIndex = i + 1;
-			previousImgIndex = i;
-			addDotSelectedToElement(dotElement[nextImgIndex]);
-			removeDotSelectedFromElement(dotElement[previousImgIndex]);
-			dotElement[previousImgIndex].classList.remove("dot_selected");
-		} else if(bannerImgFileName === slides[slides.length - 1].image) {
+		if(bannerImgFileName === slides[slides.length - 1].image) {
 			changeImgSrc(slides[0]);
 			addDotSelectedToElement(dotElement[0]);
 			removeDotSelectedFromElement(dotElement[slides.length - 1]);
-			changeImgAndText(bannerP, slides[nextImgIndex]);
-		}
+		} else if(bannerImgFileName === slides[i].image) {
+			changeImgSrc(slides[i + 1]);
+			nextImgIndex = i + 1;
+			addDotSelectedToElement(dotElement[nextImgIndex]);
+			removeDotSelectedFromElement(dotElement[i]);
+		} 
 	}
 	changeImgAndText(bannerP, slides[nextImgIndex]);
 });
